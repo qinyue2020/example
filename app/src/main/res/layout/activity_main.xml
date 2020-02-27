@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout>
+
+    <data>
+        <variable
+            name="viewModel"
+            type="com.qinyue.example.main.MainViewModel" />
+    </data>
+
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        tools:context=".MainActivity">
+        <include
+            android:id="@+id/titleview"
+            layout="@layout/layout_title" />
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_weight="1"
+            android:layout_height="0dp">
+            <androidx.viewpager.widget.ViewPager
+                android:id="@+id/view_pager"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginBottom="45dp" />
+
+            <com.jpeng.jptabbar.JPTabBar
+                android:id="@+id/tabbar"
+                android:layout_width="match_parent"
+                android:layout_height="45dp"
+                android:background="#F9F9F9"
+                android:layout_gravity="bottom"
+                app:tab_animate="Scale"
+                app:tab_middleView="@layout/layout_jptabbar_middle_view" />
+
+        </FrameLayout>
+
+    </LinearLayout>
+</layout>
