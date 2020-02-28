@@ -55,4 +55,9 @@ dependencies {
     //下拉刷新
     implementation 'com.github.xuexiangjys.SmartRefreshLayout:refresh-header:1.1.5'
     implementation 'com.github.xuexiangjys.SmartRefreshLayout:refresh-layout:1.1.5'
+    //网页
+    implementation 'com.github.xuexiangjys.AgentWeb:agentweb-core:1.0.0'
+
+    //工具类
+    implementation 'com.github.xuexiangjys.XUtil:xutil-core:1.1.7'
 }

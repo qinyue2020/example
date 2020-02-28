@@ -3,6 +3,7 @@ package com.qinyue.example.base;
 import com.qinyue.example.main.MainActivity;
 import com.qinyue.example.R;
 import com.xuexiang.xui.XUI;
+import com.xuexiang.xutil.XUtil;
 
 import androidx.multidex.MultiDexApplication;
 import me.goldze.mvvmhabit.base.BaseApplication;
@@ -52,6 +53,8 @@ public class App extends MultiDexApplication {
      */
     private void LnitializeXUI(){
         XUI.init(this); //初始化UI框架
+        XUtil.init(this);
+        XUtil.debug(true);
         XUI.debug(true);  //开启UI框架调试日志
     }
 }

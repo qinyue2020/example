@@ -5,6 +5,7 @@ import android.view.View;
 
 import com.qinyue.example.main.fragment.first.FirstFragment;
 import com.qinyue.example.main.fragment.my.MyFragment;
+import com.qinyue.example.main.fragment.web.AgentWebFragment;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -30,7 +31,7 @@ public class MainPageAdapter extends FragmentPagerAdapter {
         this.context =context;
         this.mTitles =mTitles;
         fragments.add(new FirstFragment());
-        fragments.add(new FirstFragment());
+        fragments.add(AgentWebFragment.getInstance("https://www.baidu.com/"));
         fragments.add(new FirstFragment());
         fragments.add(new MyFragment());
     }

@@ -2,10 +2,15 @@ package com.qinyue.example.main;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.viewpager.widget.ViewPager;
+import io.reactivex.functions.Consumer;
 import me.goldze.mvvmhabit.base.BaseActivity;
 import me.goldze.mvvmhabit.base.BaseViewModel;
 
+import android.Manifest;
+import android.annotation.SuppressLint;
+import android.content.Intent;
 import android.os.Bundle;
+import android.provider.MediaStore;
 import android.view.View;
 
 import com.blankj.utilcode.util.ToastUtils;
@@ -18,6 +23,7 @@ import com.qinyue.example.R;
 import com.qinyue.example.base.MyBaseActivity;
 import com.qinyue.example.databinding.ActivityMainBinding;
 import com.qinyue.example.main.adapter.MainPageAdapter;
+import com.tbruyelle.rxpermissions2.RxPermissions;
 import com.xuexiang.xui.XUI;
 import com.xuexiang.xui.widget.actionbar.TitleBar;
 import com.xuexiang.xui.widget.actionbar.TitleUtils;
@@ -27,7 +33,7 @@ import com.xuexiang.xui.widget.actionbar.TitleUtils;
  */
 public class MainActivity extends MyBaseActivity<ActivityMainBinding, MainViewModel> implements ViewPager.OnPageChangeListener {
     @Titles
-    private static final String[] mTitles = {"页面一", "页面二", "页面三", "我的"};
+    private static final String[] mTitles = {"页面一", "网页", "页面三", "我的"};
 
     @SeleIcons
     private static final int[] mSeleIcons = {R.mipmap.nav_01_pre, R.mipmap.nav_01_pre, R.mipmap.nav_01_pre, R.mipmap.nav_01_pre};
@@ -77,9 +83,25 @@ public class MainActivity extends MyBaseActivity<ActivityMainBinding, MainViewMo
 
         if (binding.tabbar.getMiddleView() != null) {
             binding.tabbar.getMiddleView().setOnClickListener(new View.OnClickListener() {
+                @SuppressLint("CheckResult")
                 @Override
                 public void onClick(View v) {
-                    ToastUtils.showShort("中间点击");
+                    //请求打开相机权限
+                    RxPermissions rxPermissions = new RxPermissions(MainActivity.this);
+                    rxPermissions.request(Manifest.permission.CAMERA)
+                            .subscribe(new Consumer<Boolean>() {
+                                @Override
+                                public void accept(Boolean aBoolean) throws Exception {
+                                    if (aBoolean) {
+                                        Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);// 启动系统相机
+                                        startActivityForResult(intent, 12);
+                                        ToastUtils.showShort("权限已经打开，直接跳入相机");
+                                    } else {
+                                        ToastUtils.showShort("权限被拒绝");
+                                    }
+                                }
+                            });
+//                    ToastUtils.showShort("测试获取权限");
                 }
             });
         }
