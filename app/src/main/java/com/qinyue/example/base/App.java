@@ -1,8 +1,12 @@
 package com.qinyue.example.base;
 
 
+import android.content.Context;
+
 import com.qinyue.example.main.MainActivity;
 import com.qinyue.example.R;
+import com.tencent.bugly.Bugly;
+import com.tencent.bugly.beta.Beta;
 import com.umeng.commonsdk.UMConfigure;
 import com.umeng.socialize.PlatformConfig;
 import com.xuexiang.xui.XUI;
@@ -28,6 +32,9 @@ public class App extends MultiDexApplication {
         LnitializeXUI();
         //初始化分享
         initShareSdk();
+        // 这里实现SDK初始化，appId替换成你的在Bugly平台申请的appId
+        // 调试时，将第三个参数改为true
+        Bugly.init(this, "d88e3b4462", true);
     }
 
     /**
@@ -82,5 +89,12 @@ public class App extends MultiDexApplication {
 //        PlatformConfig.setDing("dingoalmlnohc0wggfedpk");
 //        PlatformConfig.setVKontakte("5764965","5My6SNliAaLxEm3Lyd9J");
 //        PlatformConfig.setDropbox("oz8v5apet3arcdy","h7p2pjbzkkxt02a");
+    }
+
+    @Override
+    protected void attachBaseContext(Context base) {
+        super.attachBaseContext(base);
+        // 安装tinker
+        Beta.installTinker();
     }
 }
