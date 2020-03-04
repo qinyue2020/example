@@ -1,5 +1,4 @@
 apply plugin: 'com.android.application'
-
 android {
     compileSdkVersion 29
     buildToolsVersion "29.0.1"
@@ -30,9 +29,7 @@ android {
         sourceCompatibility = '1.8'
         targetCompatibility = '1.8'
     }
-
 }
-
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
     implementation 'androidx.appcompat:appcompat:1.1.0'
@@ -60,4 +57,11 @@ dependencies {
 
     //工具类
     implementation 'com.github.xuexiangjys.XUtil:xutil-core:1.1.7'
+    implementation files('libs\\umeng-common-2.2.5.jar')
+    implementation files('libs\\umeng-share-QQ-simplify-6.9.8.jar')
+    implementation files('libs\\umeng-share-core-6.9.8.jar')
+    implementation files('libs\\umeng-share-sina-simplify-6.9.8.jar')
+    implementation files('libs\\umeng-sharetool-6.9.8.jar')
+    implementation files('libs\\umeng-shareboard-widget-6.9.8.jar')
+
 }

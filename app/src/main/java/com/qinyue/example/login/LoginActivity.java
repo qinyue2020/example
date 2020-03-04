@@ -1,18 +1,25 @@
 package com.qinyue.example.login;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.View;
 
+import com.blankj.utilcode.util.ToastUtils;
 import com.qinyue.example.BR;
 import com.qinyue.example.R;
 import com.qinyue.example.base.AppViewModelFactory;
 import com.qinyue.example.base.MyBaseActivity;
 import com.qinyue.example.data.DataRepository;
 import com.qinyue.example.databinding.ActivityLoginBinding;
+import com.umeng.socialize.UMAuthListener;
+import com.umeng.socialize.UMShareAPI;
+import com.umeng.socialize.bean.SHARE_MEDIA;
 import com.xuexiang.xui.utils.CountDownButtonHelper;
 import com.xuexiang.xui.utils.KeyboardUtils;
+
+import java.util.Map;
 
 import androidx.annotation.Nullable;
 import androidx.lifecycle.Observer;
@@ -66,6 +73,51 @@ public class LoginActivity extends MyBaseActivity<ActivityLoginBinding,LoginView
                         getVerifyCode(binding.etPhoneNumber.getEditValue());
                     }
                 }
+            }
+        });
+        viewModel.uc.qqLoginEvent.observe(this, new Observer<Boolean>() {
+            @Override
+            public void onChanged(@Nullable Boolean aBoolean) {
+                //pSwitchObservable是boolean类型的观察者
+                UMShareAPI umShareAPI = UMShareAPI.get(getApplication());
+                umShareAPI.getPlatformInfo(LoginActivity.this, SHARE_MEDIA.QQ, new UMAuthListener(){
+                    /**
+                     * @desc 授权开始的回调
+                     * @param platform 平台名称
+                     */
+                    @Override
+                    public void onStart(SHARE_MEDIA platform) {
+                    }
+
+                    /**
+                     * @desc 授权成功的回调
+                     * @param platform 平台名称
+                     * @param action 行为序号，开发者用不上
+                     * @param data 用户资料返回
+                     */
+                    @Override
+                    public void onComplete(SHARE_MEDIA platform, int action, Map<String, String> data) {
+                        ToastUtils.showShort("成功");
+                    }
+                    /**
+                     * @desc 授权失败的回调
+                     * @param platform 平台名称
+                     * @param action 行为序号，开发者用不上
+                     * @param t 错误原因
+                     */
+                    @Override
+                    public void onError(SHARE_MEDIA platform, int action, Throwable t) {
+                        ToastUtils.showShort("失败");                }
+                    /**
+                     * @desc 授权取消的回调
+                     * @param platform 平台名称
+                     * @param action 行为序号，开发者用不上
+                     */
+                    @Override
+                    public void onCancel(SHARE_MEDIA platform, int action) {
+                        ToastUtils.showShort("取消");
+                    }
+                });
             }
         });
         binding.etPhoneNumber.addTextChangedListener(new TextWatcher() {
@@ -137,7 +189,11 @@ public class LoginActivity extends MyBaseActivity<ActivityLoginBinding,LoginView
         // TODO: 2019-11-18 这里只是界面演示而已
         mCountDownHelper.start();
     }
-
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        UMShareAPI.get(this).onActivityResult(requestCode, resultCode, data);
+    }
     @Override
     protected void onDestroy() {
         if (mCountDownHelper != null) {
@@ -145,8 +201,14 @@ public class LoginActivity extends MyBaseActivity<ActivityLoginBinding,LoginView
         }
         KeyboardUtils.removeAllKeyboardToggleListeners();
         super.onDestroy();
+        UMShareAPI.get(this).release();
     }
     public void getData(){
 
+    }
+    @Override
+    protected void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+        UMShareAPI.get(this).onSaveInstanceState(outState);
     }
 }

@@ -131,6 +131,7 @@
                     android:id="@+id/tv_other_login"
                     style="@style/TextStyle.Explain"
                     android:paddingStart="10dp"
+                    android:visibility="gone"
                     android:paddingTop="5dp"
                     android:paddingEnd="10dp"
                     android:paddingBottom="5dp"
@@ -159,14 +160,34 @@
             android:layout_marginTop="16dp"
             android:text="@string/title_login_register" />
 
-        <FrameLayout
+        <RelativeLayout
+            android:orientation="vertical"
             android:layout_width="match_parent"
             android:layout_height="match_parent">
-
             <LinearLayout
+                android:layout_marginBottom="@dimen/dp_10"
+                android:layout_above="@+id/lin"
+                android:orientation="horizontal"
+                android:gravity="center"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_gravity="bottom"
+                >
+                <com.xuexiang.xui.widget.imageview.RadiusImageView
+                    android:clickable="true"
+                    android:layout_width="@dimen/dp_50"
+                    android:layout_height="@dimen/dp_50"
+                    binding:onClickCommand="@{viewModel.qqLoginOnClickCommand}"
+                    binding:srcCompat="@drawable/ic_qq"
+                    app:riv_border_color="@color/xui_config_color_gray_6"
+                    app:riv_is_circle="true"
+                    />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/lin"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignParentBottom="true"
                 android:layout_marginBottom="20dp"
                 android:gravity="center_horizontal"
                 android:orientation="horizontal">
@@ -199,6 +220,6 @@
 
             </LinearLayout>
 
-        </FrameLayout>
+        </RelativeLayout>
     </LinearLayout>
 </layout>
