@@ -26,4 +26,11 @@ public class FirstFragment extends BaseFragment<FragmentFirstBinding,FirstViewMo
     public int initVariableId() {
         return BR.viewModel;
     }
+
+    @Override
+    public void initViewObservable() {
+        super.initViewObservable();
+        binding.tvMarquee.addDisplayString("第一次安装之后点下面的这个按钮会因为有bug而崩溃一次,再次启动之后就能自动修复这个bug");
+        binding.tvMarquee.startRoll();
+    }
 }

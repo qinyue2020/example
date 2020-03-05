@@ -1,19 +1,117 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout
-    xmlns:binding="http://schemas.android.com/apk/res-auto">
+<layout xmlns:binding="http://schemas.android.com/apk/res-auto">
+
     <data>
+
         <variable
             name="viewModel"
             type="com.qinyue.example.main.fragment.first.FirstViewModel" />
     </data>
+
     <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-        android:orientation="vertical" android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+        <com.xuexiang.xui.widget.textview.MarqueeTextView
+            android:layout_width="match_parent"
+            app:mtv_isAutoFit="true"
+            android:id="@+id/tv_marquee"
+            app:mtv_isAutoDisplay="true"
+            android:background="@color/white"
+            android:layout_marginTop="@dimen/dp_10"
+            android:layout_height="@dimen/dp_40"/>
         <com.xuexiang.xui.widget.textview.supertextview.SuperButton
             android:id="@+id/btn_login"
-            binding:onClickCommand="@{viewModel.getBugOnClickCommand}"
             style="@style/SuperButton.Primary.Login"
             android:layout_marginTop="16dp"
-            android:text="一个bug" />
+            android:text="一个bug"
+            binding:onClickCommand="@{viewModel.getBugOnClickCommand}" />
+        <com.xuexiang.xui.widget.textview.supertextview.SuperTextView
+            android:layout_width="match_parent"
+            android:layout_marginTop="@dimen/dp_10"
+            app:sCenterTextString="一组有动画效果的button"
+            android:layout_height="@dimen/dp_50"/>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/dp_10"
+            android:orientation="horizontal">
+
+            <FrameLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1">
+
+                <com.xuexiang.xui.widget.button.shinebutton.ShineButton
+                    android:id="@+id/shine_button"
+                    app:sb_checked_color="#f26d7d"
+                    app:sb_icon_image="@drawable/ic_heart"
+                    app:sb_normal_color="@android:color/darker_gray"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:layout_gravity="center" />
+
+            </FrameLayout>
+
+            <FrameLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1">
+
+                <com.xuexiang.xui.widget.button.shinebutton.ShineButton
+                    android:id="@+id/shine_button_1"
+                    app:sb_allow_random_color="false"
+                    app:sb_big_shine_color="#FF6666"
+                    app:sb_checked_color="#FF6666"
+                    app:sb_click_animation_duration="200"
+                    app:sb_enable_flashing="false"
+                    app:sb_icon_image="@drawable/ic_like"
+                    app:sb_normal_color="@android:color/darker_gray"
+                    app:sb_shine_animation_duration="1500"
+                    app:sb_shine_count="15"
+                    app:sb_shine_distance_multiple="1.5"
+                    app:sb_shine_turn_angle="10"
+                    app:sb_small_shine_color="#CC9999"
+                    app:sb_small_shine_offset_angle="20"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:layout_gravity="center"
+                    android:src="@android:color/darker_gray" />
+            </FrameLayout>
+
+            <FrameLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1">
+
+                <com.xuexiang.xui.widget.button.shinebutton.ShineButton
+                    android:id="@+id/shine_button_2"
+                    app:sb_allow_random_color="true"
+                    app:sb_checked_color="#F44336"
+                    app:sb_icon_image="@drawable/ic_smile"
+                    app:sb_normal_color="@android:color/darker_gray"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:layout_gravity="center"
+                    android:src="@android:color/darker_gray" />
+            </FrameLayout>
+
+            <FrameLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1">
+
+                <com.xuexiang.xui.widget.button.shinebutton.ShineButton
+                    android:id="@+id/shine_button_3"
+                    app:sb_enable_flashing="true"
+                    app:sb_icon_image="@drawable/ic_star"
+                    app:sb_shine_size="20dp"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:layout_gravity="center" />
+            </FrameLayout>
+
+        </LinearLayout>
     </LinearLayout>
 </layout>
